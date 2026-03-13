@@ -25,29 +25,29 @@ def is_internal(link):
 def clean_text(text):
     return " ".join(text.split())
     def fetch_page(url):
-    try:
-        res = requests.get(url, timeout=10)
-        soup = BeautifulSoup(res.text, "html.parser")
+        try:
+            res = requests.get(url, timeout=10)
+            soup = BeautifulSoup(res.text, "html.parser")
 
-        text = clean_text(soup.get_text())
+            text = clean_text(soup.get_text())
 
-        links = []
-        for a in soup.find_all("a", href=True):
-            link = urljoin(url, a["href"])
-            if is_internal(link):
-                links.append(link)
+            links = []
+            for a in soup.find_all("a", href=True):
+                link = urljoin(url, a["href"])
+                if is_internal(link):
+                    links.append(link)
 
-        return {"url": url, "text": text, "links": links}
+            return {"url": url, "text": text, "links": links}
 
-    except Exception as e:
-        print("Error:", e)
-        return None
+        except Exception as e:
+            print("Error:", e)
+            return None
 
         def crawl_site():
 
-    visited = set()
-    to_visit = [START_URL]
-    pages = []
+            visited = set()
+            to_visit = [START_URL]
+            pages = []
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
 
