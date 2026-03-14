@@ -166,12 +166,4 @@ while True:
     #response = chain.invoke( {"input_documents":docs, "question": user_question} )
     all_text = " ".join([p["text"] for p in pages])
     summary_prompt = f"Summarize what GenRocket is from this text:\n\n{all_text}"
-
-    # You could use ChatGroq or a local LLM here
-    # For example, using the same ChatGroq chain:
-    summary_llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
-    summary = summary_llm(summary_prompt)
-    print("GenRocket Summary:\n", summary)
     print("\nAnswer:", result)
-    with open("genrocket_summary.txt", "w") as f:
-    f.write(summary)
