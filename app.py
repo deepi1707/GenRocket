@@ -176,9 +176,3 @@ if question:
         answer = qa.run(question)
         st.subheader("Answer")
         st.write(answer)
-
-        # Optional: show sources
-        docs = retriever.get_relevant_documents(question)
-        st.subheader("Sources")
-        for doc in docs:
-            st.write("-", doc.metadata.get("source"))
