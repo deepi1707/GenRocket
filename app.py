@@ -64,7 +64,6 @@ if question:
 
     st.subheader("Answer")
     st.write(answer)
-    docs = retriever.get_relevant_documents(q)
 
     st.write("### Answer:")
     st.write(result)
