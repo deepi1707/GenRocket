@@ -65,6 +65,3 @@ if question:
     st.subheader("Answer")
     st.write(answer)
 
-    st.write("### Sources:")
-    for doc in docs:
-        st.write("-", doc.metadata.get("source"))
