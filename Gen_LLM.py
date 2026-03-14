@@ -173,3 +173,5 @@ while True:
     summary = summary_llm(summary_prompt)
     print("GenRocket Summary:\n", summary)
     print("\nAnswer:", result)
+    with open("genrocket_summary.txt", "w") as f:
+    f.write(summary)
