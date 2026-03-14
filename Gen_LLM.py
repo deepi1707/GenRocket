@@ -24,30 +24,29 @@ def is_internal(link):
 
 def clean_text(text):
     return " ".join(text.split())
-    def fetch_page(url):
-        try:
-            res = requests.get(url, timeout=10)
-            soup = BeautifulSoup(res.text, "html.parser")
 
-            text = clean_text(soup.get_text())
+def fetch_page(url):
+    try:
+        res = requests.get(url, timeout=10)
+        soup = BeautifulSoup(res.text, "html.parser")
 
-            links = []
-            for a in soup.find_all("a", href=True):
-                link = urljoin(url, a["href"])
-                if is_internal(link):
-                    links.append(link)
+        text = clean_text(soup.get_text())
 
-            return {"url": url, "text": text, "links": links}
+        links = []
+        for a in soup.find_all("a", href=True):
+            link = urljoin(url, a["href"])
+            if is_internal(link):
+                links.append(link)
 
-        except Exception as e:
-            print("Error:", e)
-            return None
+        return {"url": url, "text": text, "links": links}
 
-        def crawl_site():
-
-            visited = set()
-            to_visit = [START_URL]
-            pages = []
+    except Exception as e:
+        print("Error:", e)
+        return None
+def crawl_site():
+    visited = set()
+    to_visit = [START_URL]
+    pages = []
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
 
@@ -100,7 +99,7 @@ splitter = RecursiveCharacterTextSplitter(
 )
 
 documents = splitter.create_documents(texts, metadatas=metadatas)
-#from langchain_huggingface import HuggingFaceEmbeddings
+    #from langchain_huggingface import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2")
 if os.path.exists(VECTOR_DB_DIR):
@@ -121,7 +120,7 @@ else:
     )
 
     vectordb.persist()
-    os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = "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"
 
 llm = ChatGroq(
     model="llama-3.1-8b-instant",
